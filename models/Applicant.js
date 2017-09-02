@@ -13,3 +13,15 @@ const applicantSchema = new mongoose.Schema({
 	city: String,
 	state: String 
 });
+
+applicantSchema.pre('save', function(next){
+	if(!this.isModified('firstName')){
+		next(); // skip it
+		return; // stop this function from running
+	}
+	this.slug = slug(this.name);
+	next();
+	// TODO make more resilient so slugs are unique
+});
+
+module.exports = mongoose.model('Applicant', applicantSchema);
