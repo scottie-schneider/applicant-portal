@@ -11,17 +11,15 @@ const applicantSchema = new mongoose.Schema({
 	address: String,
 	zip: Number,
 	city: String,
-	state: String 
+	state: String,
+	tags: [String] 
 });
 
+/*
 applicantSchema.pre('save', function(next){
-	if(!this.isModified('firstName')){
-		next(); // skip it
-		return; // stop this function from running
-	}
-	this.slug = slug(this.name);
-	next();
+	
+	
 	// TODO make more resilient so slugs are unique
 });
-
+*/
 module.exports = mongoose.model('Applicant', applicantSchema);
